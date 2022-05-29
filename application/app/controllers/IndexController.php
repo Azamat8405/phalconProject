@@ -50,36 +50,6 @@ class IndexController extends ControllerBase
         $analysis->validate();
 
         echo $analysis->swagger->__toString();
-
-
-//        $this->response->setJsonContent($analysis->swagger->__toString());
-
-//        /** @var array $config */
-//        $config = $this->di->get('swagger');
-//        $swagger = \Swagger\scan($config['path']);
-//        $swagger->host = $config['host'];
-//        $swagger->schemes = $config['schemes'];
-//        $swagger->basePath = $config['basePath'];
-//        $swagger->info->version = $config['version'];
-//        $swagger->info->title = $config['title'];
-//        $swagger->info->description = $config['description'];
-//        $swagger->info->contact->email = $config['email'];
-
-//          echo  $swagger->__toString();
-//          exit;
-
-//        $openapi = \OpenApi\Generator::scan(['/var/www/html/application/app']);
-//
-//        header('Content-Type: application/x-yaml');
-//        echo $openapi->toYaml();
-
-
-//        $openapi = \Swagger\scan('/var/www/html/application/app');
-//        echo $openapi->__toString();
-
-//        $openapi = \OpenApi\Generator::scan(['/var/www/html/application/app']);
-//        header('Content-Type: application/x-yaml');
-//        echo $openapi->toYaml();
     }
 
     public function docsAction(){
