@@ -1,0 +1,17 @@
+{
+    "name": "phalcon/app",
+    "description": "Phalcon App",
+    "authors": [
+        {
+            "name": "Azam"
+        }
+    ],
+    "require-dev": {
+        "phalcon/migrations": "^2.2",
+        "phalcon/devtools": "~4.1"
+    },
+    "require": {
+        "igsem/phalcon-swagger": "^0.0.2",
+        "symfony/finder": "4.4.3"
+    }
+}

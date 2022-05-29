@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  app:
+    container_name: app
+    build: .
+    working_dir: /var/www/html
+    volumes:
+      - ../:/var/www/html
+    ports:
+      - '8080:80'
+    expose:
+      - '8080'
+    depends_on:
+      - postgres_db
+    links:
+      - postgres_db
+
+
+  #PostgreSQL
+  postgres_db:
+    image: postgres:13
+    container_name: 'postgres_db'
+    restart: always
+    ## чтобы данные не терялись при пересборке контейнера
+    volumes:
+      - postgres_db:/var/lib/postgres_db/data
+    ## чтобы смотреть изменения в базе прокидываем порт наружу
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: "db_name"
+      POSTGRES_USER: "db_user"
+      POSTGRES_PASSWORD: "db_pass"
+
+volumes:
+  postgres_db: {}
