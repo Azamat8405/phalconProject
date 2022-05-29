@@ -125,6 +125,7 @@ class UserController extends ControllerBase
         $builder = $this->modelsManager->createBuilder();
 
         $users = $builder
+                    ->columns('id, first_name, second_name, patronymic, created_at')
                     ->from(User::class)
                     ->orderBy('id')
                     ->limit($perPage)
@@ -293,7 +294,7 @@ class UserController extends ControllerBase
         $query = addslashes($this->request->get('query'));
 
         $response = $this->di->get('db')->query(
-            "SELECT * FROM \"user\" WHERE
+            "SELECT first_name, second_name, patronymic, created_at FROM \"user\" WHERE
                 to_tsvector('russian', coalesce(first_name,'') || ' ' || coalesce(second_name,'') || ' ' || coalesce(patronymic,''))
                 @@
                 plainto_tsquery('" . $query . "')"
