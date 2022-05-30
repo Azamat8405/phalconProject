@@ -291,14 +291,18 @@ class UserController extends ControllerBase
     public function searchAction()
     {
         $this->view->disable();
-        $query = addslashes($this->request->get('query'));
+        $query = $this->request->get('query');
 
         $response = $this->di->get('db')->query(
             "SELECT first_name, second_name, patronymic, created_at FROM \"user\" WHERE
-                to_tsvector('russian', coalesce(first_name,'') || ' ' || coalesce(second_name,'') || ' ' || coalesce(patronymic,''))
-                @@
-                plainto_tsquery('" . $query . "')"
+                    to_tsvector('russian', coalesce(first_name,'') || ' ' || coalesce(second_name,'') || ' ' || coalesce(patronymic,''))
+                    @@
+                    plainto_tsquery(?)",
+                [
+                    $query
+                ]
         );
+
         return $this->response->setJsonContent($response->fetchAll());
     }
 }
